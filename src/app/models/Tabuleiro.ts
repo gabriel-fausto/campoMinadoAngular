@@ -1,27 +1,39 @@
+import { ReveladorDeCelulas } from './ReveladorDeCelulas';
+import { Injectable } from '@angular/core';
+import { GerenciadorDeCelulas } from './GerenciadorDeCelulas';
 import { Celula } from './Celula';
-import { GeradorDeNumerosAleatorios } from './GeradorDeNumerosAleatorios';
 import { ConfiguracaoDeJogo } from './ConfiguracaoDeJogo';
+
+@Injectable({
+  providedIn: 'root',
+})
 
 export class Tabuleiro {
   configuracaoDeJogo: ConfiguracaoDeJogo;
-  geradorDeNumerosAleatorios: GeradorDeNumerosAleatorios;
+  gerenciadorDeCelulas: GerenciadorDeCelulas;
+  reveladorDeCelulas: ReveladorDeCelulas;
   quantidadeDeCelulas: number;
   celulas: Celula[];
 
-  constructor(configuracao: ConfiguracaoDeJogo, gerador: GeradorDeNumerosAleatorios) {
-    this.configuracaoDeJogo = configuracao;
-    this.geradorDeNumerosAleatorios = gerador;
-    this.quantidadeDeCelulas = this.configuracaoDeJogo.calculaTotalDeCelulas();
-    this.iniciaTabuleiro();
+  constructor(gerenciador: GerenciadorDeCelulas, revelador: ReveladorDeCelulas) {
+    this.gerenciadorDeCelulas = gerenciador;
+    this.reveladorDeCelulas = revelador;
   }
 
-  iniciaTabuleiro(): void {
-    let posicaoDasBombas = this.geradorDeNumerosAleatorios.gerarUmaLista(this.configuracaoDeJogo.bombasNoTabuleiro, this.quantidadeDeCelulas);
-    let contadorDePosicao = 0;
-    for (let _posicaoHorizontal = 0; _posicaoHorizontal < this.configuracaoDeJogo.celulasNaHorizontal; _posicaoHorizontal++) {
-      for (let _posicaoVertical = 0; _posicaoVertical < this.configuracaoDeJogo.celulasNaVertical; _posicaoVertical++) {
-        this.celulas.push(new Celula(posicaoDasBombas, contadorDePosicao, _posicaoHorizontal, _posicaoVertical));
-      }
-    }
+  inicializa(configuracao: ConfiguracaoDeJogo) {
+    this.configuracaoDeJogo = configuracao;
+    this.criaTabuleiro();
+    this.gerenciadorDeCelulas.insereNumeroNasCelulas(this.celulas);
+  }
+
+  private criaTabuleiro(): void {
+    this.celulas = this.gerenciadorDeCelulas.criaCelulas(
+      this.configuracaoDeJogo.celulasNaHorizontal,
+      this.configuracaoDeJogo.celulasNaVertical,
+      this.configuracaoDeJogo.bombasNoTabuleiro)
+  }
+
+  revelarCelulasAoRedor(celula: Celula) {
+    this.reveladorDeCelulas.revelarCelulasAoRedor(celula, this.celulas);
   }
 }

@@ -1,3 +1,4 @@
+import { Tabuleiro } from './models/Tabuleiro';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,10 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  variavelLista: [any[], any[]]
   title = 'campoMinadoAngular';
+  texto = "";
+  objetos = [
+    { exibir: false, valor: 1 },
+    { exibir: false, valor: 2 },
+    { exibir: false, valor: 3 },
+    { exibir: false, valor: 4 },
+    { exibir: false, valor: 5 },
+    { exibir: false, valor: 6 },
+    { exibir: true, valor: 7 },
+  ]
 
-  metodoQualquer() {
-    this.variavelLista[0][0] = { nome: "teste", padrao: 2.1 };
+  clicou(obj) {
+    let obj2 = { exibir: false, valor: 8 }
+    this.objetos.push(obj2);
+    obj2.exibir = true;
   }
 }

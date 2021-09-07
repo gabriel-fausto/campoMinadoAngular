@@ -2,7 +2,7 @@ import { TipoDeCelula } from './TipoDeCelula';
 
 export class Celula {
   _tipo: TipoDeCelula;
-  _numero: number;
+  _numeroDeBombasAoRedor: number;
   _exibirTipo: boolean;
   _coordenadaHorizontal: number;
   _coordenadaVertical: number;
@@ -17,6 +17,10 @@ export class Celula {
 
   isVazio(): boolean {
     return this._tipo === TipoDeCelula.VAZIO;
+  }
+
+  isRelevada(): boolean {
+    return this._exibirTipo;
   }
 
   /**
@@ -38,6 +42,21 @@ export class Celula {
       return TipoDeCelula.BOMBA;
     }
     return TipoDeCelula.VAZIO;
+  }
+
+  incluirNumeroDeBombasAoRedor(celulasAoRedor: Celula[]) {
+    if (this.isBomba())
+      return;
+
+    let contadorDeBombas = 0;
+    for (let celula of celulasAoRedor) {
+      if (celula.isBomba())
+        contadorDeBombas++;
+    }
+    if (contadorDeBombas > 0) {
+      this._tipo = TipoDeCelula.NUMERO;
+      this._numeroDeBombasAoRedor = contadorDeBombas;
+    }
   }
 }
 

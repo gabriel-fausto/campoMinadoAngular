@@ -1,3 +1,4 @@
+import { BotaoEstilizado } from './components/botao-estilizado.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -5,7 +6,8 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BotaoEstilizado,
   ],
   imports: [
     BrowserModule
