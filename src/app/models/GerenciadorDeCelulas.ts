@@ -24,6 +24,7 @@ export class GerenciadorDeCelulas {
     for (let _posicaoHorizontal = 0; _posicaoHorizontal < celulasNaHorizontal; _posicaoHorizontal++) {
       for (let _posicaoVertical = 0; _posicaoVertical < celulasNaVertical; _posicaoVertical++) {
         celulas.push(new Celula(posicaoDasBombas, contadorDePosicao, _posicaoHorizontal, _posicaoVertical));
+        contadorDePosicao++;
       }
     }
     return celulas
@@ -82,8 +83,8 @@ export class GerenciadorDeCelulas {
 
   private incluiCelula(celulasDoTabuleiro: Celula[], posicaoHorizontal: number, posicaoVertical: number) {
     let celulaIndex = celulasDoTabuleiro.findIndex(c =>
-      c._coordenadaVertical == posicaoHorizontal &&
-      c._coordenadaHorizontal == posicaoVertical);
+      c._coordenadaVertical == posicaoVertical &&
+      c._coordenadaHorizontal == posicaoHorizontal);
     if (celulaIndex > -1)
       this._celulasAoRedor.push(celulasDoTabuleiro[celulaIndex]);
   }

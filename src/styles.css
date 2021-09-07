@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Roboto&display=swap');
+
+html {
+  background-color: #FBFBFB;
+}
+body {
+  width: 1440px;
+  margin: 0 auto;
+}

@@ -1,10 +1,7 @@
-<h1>Campo minado</h1>
-<!-- <form action="">
-  <h2>Configurações de jogo</h2>
-  <label for="">Numero de linhas:</label><input min="10" type="number" required name="numeroDeLinhas">
-  <label for="">Numero de colunas:</label><input min="10" type="number" required name="numeroDeColunas">
-</form> -->
-<app-botao-estilizado *ngFor="let obj of objetos" [valor]="obj.valor" [exibir]="obj.exibir" (click)="clicou(obj)">
-</app-botao-estilizado>
+<h1 class="tituloPrincipal" *ngIf="!this.jogoIniciado">Campo minado</h1>
+<app-configuracao *ngIf="!this.jogoIniciado" [configuracaoDeJogo]="this._configuracaoDeJogo"
+  (iniciarJogoEvent)="iniciarJogo()"></app-configuracao>
+<app-tabuleiro *ngIf="this.jogoIniciado" [iniciarJogo]="this.jogoIniciado"
+  [configuracaoDeJogo]="this._configuracaoDeJogo">
 
-<h3>{{ this.texto }}</h3>
+</app-tabuleiro>

@@ -23,9 +23,6 @@ export class Celula {
     return this._exibirTipo;
   }
 
-  /**
-   *
-   */
   constructor(posicaoDasBombas: number[], posicaoDaCelula: number, coordenadaHorizontal: number, coordenadaVertical: number) {
     this._tipo = this.escolheTipo(posicaoDasBombas, posicaoDaCelula);
     this._exibirTipo = false;
@@ -45,10 +42,11 @@ export class Celula {
   }
 
   incluirNumeroDeBombasAoRedor(celulasAoRedor: Celula[]) {
+    let contadorDeBombas = 0;
+
     if (this.isBomba())
       return;
 
-    let contadorDeBombas = 0;
     for (let celula of celulasAoRedor) {
       if (celula.isBomba())
         contadorDeBombas++;

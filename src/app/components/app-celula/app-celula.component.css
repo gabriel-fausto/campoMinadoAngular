@@ -1,0 +1,42 @@
+.celula {
+  box-sizing: border-box;
+  border-radius: 1px;
+  width: 20px;
+  height: 20px;
+  margin-right: 1px;
+  margin-bottom: 1px;
+  display: 	flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto';
+}
+
+.celulaNaoRevelada {
+  background: #C4C4C4;
+}
+
+.nenhumaBomba {
+  background: #EBFAFF;
+  border: 1px solid #A2DBED;
+}
+
+.poucasBombas {
+  background: #FFFEEB;
+  border: 1px solid #E2EDA2;
+}
+
+.algumasBombas {
+  background: #FFF9EB;
+  border: 1px solid #EDCFA2;
+}
+
+.muitasBombas {
+  background: #FFEBEB;
+  border: 1px solid #EDA2A2;
+}
+
+.bombaAqui {
+  background-image: url('../../../assets/mina.png');
+  background-size: cover;
+}

@@ -1,3 +1,4 @@
+import { ConfiguracaoDeJogo } from './models/ConfiguracaoDeJogo';
 import { Tabuleiro } from './models/Tabuleiro';
 import { Component } from '@angular/core';
 
@@ -7,21 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'campoMinadoAngular';
-  texto = "";
-  objetos = [
-    { exibir: false, valor: 1 },
-    { exibir: false, valor: 2 },
-    { exibir: false, valor: 3 },
-    { exibir: false, valor: 4 },
-    { exibir: false, valor: 5 },
-    { exibir: false, valor: 6 },
-    { exibir: true, valor: 7 },
-  ]
+  _configuracaoDeJogo: ConfiguracaoDeJogo;
+  teste: string;
+  jogoIniciado: boolean = false;
+  constructor(configuracaoDeJogo: ConfiguracaoDeJogo) {
+    this._configuracaoDeJogo = configuracaoDeJogo;
+  }
 
-  clicou(obj) {
-    let obj2 = { exibir: false, valor: 8 }
-    this.objetos.push(obj2);
-    obj2.exibir = true;
+  iniciarJogo() {
+    this.jogoIniciado = true;
   }
 }

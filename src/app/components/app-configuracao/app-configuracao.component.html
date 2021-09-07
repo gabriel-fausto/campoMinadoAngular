@@ -1,0 +1,30 @@
+<form #configForm="ngForm">
+  <div class="inputContent">
+    <label>NÚMERO DE LINHAS</label><input required type="number" name="horizontal"
+      [(ngModel)]="this.configuracaoDeJogo.celulasNaVertical" #horizontal="ngModel"
+      [ngClass]="{'invalido': horizontal.invalid }" [appMinNumber]="1" [appMaxNumber]="30">
+    <div class="feedback">
+      <span>Mínimo de 10 e máximo de 30 linhas</span>
+    </div>
+  </div>
+  <div class="inputContent">
+    <label>NÚMERO DE COLUNAS</label><input required type="number" name="vertical"
+      [(ngModel)]="this.configuracaoDeJogo.celulasNaHorizontal" #vertical="ngModel"
+      [ngClass]="{'invalido': vertical.invalid }" [appMinNumber]="1" [appMaxNumber]="65">
+    <div class="feedback">
+      <span>Mínimo de 10 e máximo de 65 colunas</span>
+    </div>
+  </div>
+  <div class="inputContent">
+    <label>NÚMERO DE <span>BOMBAS</span></label><input class="bombas" type="number" name="bomba"
+      [(ngModel)]="this.configuracaoDeJogo.bombasNoTabuleiro" #bomba="ngModel" [ngClass]="{'invalido': bomba.invalid }"
+      [appMinNumber]="1" [appMaxNumber]="500">
+    <div class="feedback">
+      <span>Mínimo de 10 e máximo de 500 bombas</span>
+    </div>
+  </div>
+  <div class="divButton">
+    <input type="button" (click)="iniciarJogo()" [disabled]="!configForm.valid"
+      [ngClass]="{'botaoOff': !configForm.valid }" value="JOGAR" />
+  </div>
+</form>

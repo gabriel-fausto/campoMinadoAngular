@@ -1,0 +1,11 @@
+.tituloPrincipal {
+  width: 255px;
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 81px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 80px auto;
+}

@@ -1,0 +1,102 @@
+.inputContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 800px;
+  margin-top: 60px;
+  margin: 40px auto;
+  flex-wrap: wrap;
+}
+
+.inputContent label {
+  font-family: 'Cinzel';
+  font-size: 45px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.inputContent span {
+  text-decoration-line: underline;
+  color: #C02F2F;
+}
+
+.inputContent input {
+  font-family: 'Cinzel';
+  border: 1px solid #DADADA;
+  box-sizing: border-box;
+  width: 102px;
+  height: 102px;
+  font-size: 65px;
+  text-align: center;
+  border-radius: 16px;
+  color: rgba(0, 0, 0, 0.8)
+}
+
+form .bombas {
+  width: 150px;
+}
+
+form .invalido {
+  border: 1px solid rgb(225, 65, 65);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+.feedback {
+  display: none;
+}
+
+.invalido~.feedback{
+  font-family: 'Cinzel';
+  font-weight: 600;
+  margin-top: -22px;
+  width: 600px;
+  display: block;
+  float: left;
+}
+.divButton {
+  display: flex;
+  width: 1200px;
+  height: 92px;
+  margin: 90px auto 0;
+  justify-content: flex-end;
+}
+
+.divButton input {
+  border: 0;
+  float: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 97px;
+
+  position: absolute;
+  width: 335px;
+  height: 92px;
+
+  background: #C3E8B2;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 33px;
+
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 45px;
+  line-height: 60px;
+  text-align: center;
+  cursor: pointer;
+  color: #000000c2;
+}
+
+.divButton .botaoOff {
+  background: rgb(255, 122, 122);
+  cursor: not-allowed;
+}

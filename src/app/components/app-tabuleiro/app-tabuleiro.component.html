@@ -1,0 +1,6 @@
+<div class="alinhaHorizonte">
+  <div class="container" [style.width.px]="this.tamanhoHorizontal" [style.height.px]="this.tamanhoVertical">
+    <app-celula *ngFor="let celula of celulasOrdenadas()" [celula]="celula" (click)="clicouNa(celula)">
+    </app-celula>
+  </div>
+</div>
