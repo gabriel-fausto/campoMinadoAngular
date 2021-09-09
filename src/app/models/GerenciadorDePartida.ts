@@ -34,7 +34,7 @@ export class GerenciadorDePartida {
   }
 
   sorteiaPosicaoDasBombas() {
-    this._posicaoDasBombas = this._geradorDeNumerosAleatorios.gerarUmaLista(this._configuracaoDeJogo.bombasNoTabuleiro, this._configuracaoDeJogo.totalDeCelulas);
+    this._posicaoDasBombas = this._geradorDeNumerosAleatorios.gerarUmaLista(this._configuracaoDeJogo.bombasNoTabuleiro, this._configuracaoDeJogo.calculaTotalDeCelulas());
   }
 
   criaCelulasDoTabuleiro() {
