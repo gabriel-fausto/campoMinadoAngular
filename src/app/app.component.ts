@@ -1,5 +1,4 @@
-import { ConfiguracaoDeJogo } from './models/ConfiguracaoDeJogo';
-import { Tabuleiro } from './models/Tabuleiro';
+import { GerenciadorDePartida } from './models/GerenciadorDePartida';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,14 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  _configuracaoDeJogo: ConfiguracaoDeJogo;
+  _gerenciadorDePartida: GerenciadorDePartida;
   teste: string;
   jogoIniciado: boolean = false;
-  constructor(configuracaoDeJogo: ConfiguracaoDeJogo) {
-    this._configuracaoDeJogo = configuracaoDeJogo;
+
+  constructor(gerenciadorDePartida: GerenciadorDePartida) {
+    this._gerenciadorDePartida = gerenciadorDePartida;
   }
 
   iniciarJogo() {
     this.jogoIniciado = true;
+    this._gerenciadorDePartida.preparaNovaPartida();
   }
 }

@@ -1,3 +1,4 @@
+import { RevelarService } from './services/revelarService';
 import { TipoDeCelula } from './TipoDeCelula';
 
 export class Celula {
@@ -6,6 +7,7 @@ export class Celula {
   _exibirTipo: boolean;
   _coordenadaHorizontal: number;
   _coordenadaVertical: number;
+  _revelarService: RevelarService;
 
   isBomba(): boolean {
     return this._tipo === TipoDeCelula.BOMBA;
@@ -23,11 +25,12 @@ export class Celula {
     return this._exibirTipo;
   }
 
-  constructor(posicaoDasBombas: number[], posicaoDaCelula: number, coordenadaHorizontal: number, coordenadaVertical: number) {
+  constructor(posicaoDasBombas: number[], posicaoDaCelula: number, coordenadaHorizontal: number, coordenadaVertical: number, revelarService: RevelarService) {
     this._tipo = this.escolheTipo(posicaoDasBombas, posicaoDaCelula);
     this._exibirTipo = false;
     this._coordenadaHorizontal = coordenadaHorizontal;
     this._coordenadaVertical = coordenadaVertical;
+    this._revelarService = revelarService;
   }
 
   exibirTipo() {
@@ -55,6 +58,10 @@ export class Celula {
       this._tipo = TipoDeCelula.NUMERO;
       this._numeroDeBombasAoRedor = contadorDeBombas;
     }
+  }
+
+  revelar() {
+    this._revelarService.revelar(this);
   }
 }
 
