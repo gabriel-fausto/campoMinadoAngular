@@ -1,30 +1,34 @@
+import { Tabuleiro } from './Tabuleiro';
 import { RevelarService } from './services/revelarService';
 import { ConfiguracaoDeJogo } from './ConfiguracaoDeJogo';
 import { GeradorDeNumerosAleatorios } from './GeradorDeNumerosAleatorios';
 import { Celula } from './Celula';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 
-export class GerenciadorDePartida {
-  _geradorDeNumerosAleatorios: GeradorDeNumerosAleatorios;
+export class GerenciadorDePartida implements OnInit, OnDestroy {
   _celulasAoRedor: Celula[];
-  _configuracaoDeJogo: ConfiguracaoDeJogo;
   _celulasDoTabuleiro: Celula[] = [];
-  _posicaoDasBombas: number[];
-  _revelarSubscription: Subscription;
-  _revelarService: RevelarService;
+  private posicaoDasBombas: number[];
+  private revelarSubscription: Subscription;
   /**
    *
    */
-  constructor(configuracaoDeJogo: ConfiguracaoDeJogo, geradorDeNumerosAleatorios: GeradorDeNumerosAleatorios, revelarService: RevelarService) {
-    this._geradorDeNumerosAleatorios = geradorDeNumerosAleatorios;
-    this._configuracaoDeJogo = configuracaoDeJogo;
-    this._revelarService = revelarService;
-    this._revelarSubscription = this._revelarService.onRevelar().subscribe(celula => this.propagaRevelacao(celula));
+  constructor(public configuracaoDeJogo: ConfiguracaoDeJogo,
+    private geradorDeNumerosAleatorios: GeradorDeNumerosAleatorios,
+    private revelarService: RevelarService,
+    private tabuleiro: Tabuleiro) {
+  }
+
+  ngOnInit() {
+    this.revelarSubscription = this.revelarService.onRevelar().subscribe(celula => this.propagaRevelacao(celula));
+  }
+  ngOnDestroy() {
+    this.revelarSubscription.unsubscribe();
   }
 
   preparaNovaPartida(): void {
@@ -34,14 +38,14 @@ export class GerenciadorDePartida {
   }
 
   sorteiaPosicaoDasBombas() {
-    this._posicaoDasBombas = this._geradorDeNumerosAleatorios.gerarUmaLista(this._configuracaoDeJogo.bombasNoTabuleiro, this._configuracaoDeJogo.calculaTotalDeCelulas());
+    this.posicaoDasBombas = this.geradorDeNumerosAleatorios.gerarUmaLista(this.configuracaoDeJogo.bombasNoTabuleiro, this.configuracaoDeJogo.calculaTotalDeCelulas());
   }
 
   criaCelulasDoTabuleiro() {
     let contadorDePosicao = 0;
-    for (let _posicaoVertical = 0; _posicaoVertical < this._configuracaoDeJogo.celulasNaVertical; _posicaoVertical++) {
-      for (let _posicaoHorizontal = 0; _posicaoHorizontal < this._configuracaoDeJogo.celulasNaHorizontal; _posicaoHorizontal++) {
-        let c = new Celula(this._posicaoDasBombas, contadorDePosicao, _posicaoHorizontal, _posicaoVertical, this._revelarService);
+    for (let _posicaoVertical = 0; _posicaoVertical < this.configuracaoDeJogo.celulasNaVertical; _posicaoVertical++) {
+      for (let _posicaoHorizontal = 0; _posicaoHorizontal < this.configuracaoDeJogo.celulasNaHorizontal; _posicaoHorizontal++) {
+        let c = new Celula(this.posicaoDasBombas, contadorDePosicao, _posicaoHorizontal, _posicaoVertical, this.revelarService);
         this._celulasDoTabuleiro.push(c);
         contadorDePosicao++;
       }
@@ -67,7 +71,7 @@ export class GerenciadorDePartida {
     return this._celulasAoRedor;
   }
 
-  private incluiCelulaEsquerda(celula: Celula,) {
+  private incluiCelulaEsquerda(celula: Celula) {
     this.incluiCelula((celula._coordenadaHorizontal - 1), celula._coordenadaVertical);
   }
 

@@ -1,7 +1,7 @@
 <h1 class="tituloPrincipal" *ngIf="!this.jogoIniciado">Campo minado</h1>
-<app-configuracao *ngIf="!this.jogoIniciado" [configuracaoDeJogo]="this._gerenciadorDePartida._configuracaoDeJogo"
+<app-configuracao *ngIf="!this.jogoIniciado" [configuracaoDeJogo]="this._gerenciadorDePartida.configuracaoDeJogo"
   (iniciarJogoEvent)="iniciarJogo()"></app-configuracao>
 <app-tabuleiro *ngIf="this.jogoIniciado" [celulas]="this._gerenciadorDePartida._celulasDoTabuleiro"
-  [tamanhoHorizontal]="((this._gerenciadorDePartida._configuracaoDeJogo.celulasNaHorizontal * 21) + 32)"
-  [tamanhoVertical]="((this._gerenciadorDePartida._configuracaoDeJogo.celulasNaVertical * 21) + 32)">
+  [tamanhoHorizontal]="((this._gerenciadorDePartida.configuracaoDeJogo.celulasNaHorizontal * 21) + 32)"
+  [tamanhoVertical]="((this._gerenciadorDePartida.configuracaoDeJogo.celulasNaVertical * 21) + 32)">
 </app-tabuleiro>
