@@ -1,40 +1,43 @@
+import { Coordenada } from './Coordenada';
 import { RevelarService } from './services/revelarService';
 import { TipoDeCelula } from './TipoDeCelula';
 
 export class Celula {
-  _tipo: TipoDeCelula;
-  _numeroDeBombasAoRedor: number;
-  _exibirTipo: boolean;
-  _coordenadaHorizontal: number;
-  _coordenadaVertical: number;
-  _revelarService: RevelarService;
+  private tipo: TipoDeCelula;
+  private numeroDeBombasAoRedor: number;
+  private revelouValor: boolean;
+  private coordenada: Coordenada;
+  private revelarService: RevelarService;
+
+  getNumeroDeBombasAoRedor(): number {
+    return this.numeroDeBombasAoRedor;
+  }
+
+  getCoordenada() {
+    return this.coordenada;
+  }
 
   isBomba(): boolean {
-    return this._tipo === TipoDeCelula.BOMBA;
+    return this.tipo === TipoDeCelula.BOMBA;
   }
 
   isNumero(): boolean {
-    return this._tipo === TipoDeCelula.NUMERO;
+    return this.tipo === TipoDeCelula.NUMERO;
   }
 
   isVazio(): boolean {
-    return this._tipo === TipoDeCelula.VAZIO;
+    return this.tipo === TipoDeCelula.VAZIO;
   }
 
   isRelevada(): boolean {
-    return this._exibirTipo;
+    return this.revelouValor;
   }
 
   constructor(posicaoDasBombas: number[], posicaoDaCelula: number, coordenadaHorizontal: number, coordenadaVertical: number, revelarService: RevelarService) {
-    this._tipo = this.escolheTipo(posicaoDasBombas, posicaoDaCelula);
-    this._exibirTipo = false;
-    this._coordenadaHorizontal = coordenadaHorizontal;
-    this._coordenadaVertical = coordenadaVertical;
-    this._revelarService = revelarService;
-  }
-
-  exibirTipo() {
-    this._exibirTipo = true;
+    this.tipo = this.escolheTipo(posicaoDasBombas, posicaoDaCelula);
+    this.revelouValor = false;
+    this.coordenada = new Coordenada(coordenadaHorizontal, coordenadaVertical);
+    this.revelarService = revelarService;
   }
 
   private escolheTipo(posicaoDasBombas: number[], posicaoDaCelula: number): TipoDeCelula {
@@ -55,13 +58,25 @@ export class Celula {
         contadorDeBombas++;
     }
     if (contadorDeBombas > 0) {
-      this._tipo = TipoDeCelula.NUMERO;
-      this._numeroDeBombasAoRedor = contadorDeBombas;
+      this.tipo = TipoDeCelula.NUMERO;
+      this.numeroDeBombasAoRedor = contadorDeBombas;
     }
   }
 
-  revelar() {
-    this._revelarService.revelar(this);
+  revelar(): void {
+    if (this.isRelevada())
+      return;
+    this.revelarValor();
+    if (this.podeRevelarAoRedor())
+      this.revelarService.revelarAoRedor(this);
+  }
+
+  private revelarValor() {
+    this.revelouValor = true;
+  }
+
+  private podeRevelarAoRedor(): boolean {
+    return !this.isBomba() && this.isVazio();
   }
 }
 

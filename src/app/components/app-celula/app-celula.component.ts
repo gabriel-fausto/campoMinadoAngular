@@ -21,10 +21,10 @@ export class appCelula {
       return 'nenhumaBomba';
     }
     else {
-      if (this.celula._numeroDeBombasAoRedor < 4) {
+      if (this.celula.getNumeroDeBombasAoRedor() < 4) {
         return 'poucasBombas';
       }
-      else if (this.celula._numeroDeBombasAoRedor < 7) {
+      else if (this.celula.getNumeroDeBombasAoRedor() < 7) {
         return 'algumasBombas';
       }
       else {

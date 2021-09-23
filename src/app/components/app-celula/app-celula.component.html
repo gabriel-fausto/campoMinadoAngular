@@ -1,3 +1,3 @@
 <div (click)="celula.revelar()" class="celula" [ngClass]="determinaClasse()">
-  <p *ngIf="this.celula.isRelevada()">{{this.celula._numeroDeBombasAoRedor}}</p>
+  <p *ngIf="this.celula.isRelevada()">{{this.celula.getNumeroDeBombasAoRedor()}}</p>
 </div>

@@ -17,6 +17,6 @@ export class AppComponent {
 
   iniciarJogo() {
     this.jogoIniciado = true;
-    this._gerenciadorDePartida.preparaNovaPartida();
+    this._gerenciadorDePartida.prepararNovaPartida();
   }
 }

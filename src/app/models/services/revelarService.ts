@@ -12,7 +12,7 @@ export class RevelarService {
     return this.subject.asObservable();
   }
 
-  revelar(celula: Celula): void {
-    this.subject.next(celula)
+  revelarAoRedor(celula: Celula): void {
+    this.subject.next(celula);
   }
 }

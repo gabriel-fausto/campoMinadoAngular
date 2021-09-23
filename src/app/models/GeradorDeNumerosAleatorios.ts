@@ -5,28 +5,30 @@ import { Injectable } from "@angular/core";
 })
 
 export class GeradorDeNumerosAleatorios {
+  private numerosAleatorios: number[] = [];
+  private numeroAleatorio: number = 0;
 
   gerarUmaLista(quantidade: number, numeroLimite: number): number[] {
-    let _listaDeNumeros = [];
-    let _numeroAleatorio = 0;
+    this.numerosAleatorios = [];
+    this.numeroAleatorio = 0;
     for (var _i = 0; _i < quantidade; _i++) {
 
-      _numeroAleatorio = this.gera(numeroLimite);
+      this.numeroAleatorio = this.gerar(numeroLimite);
 
-      if (!this.existeNaLista(_listaDeNumeros, _numeroAleatorio))
-        _listaDeNumeros.push(_numeroAleatorio);
+      if (!this.existirNaLista())
+        this.numerosAleatorios.push(this.numeroAleatorio);
       else
         _i--;
     }
 
-    return _listaDeNumeros;
+    return this.numerosAleatorios;
   }
 
-  gera(numeroLimite: number): number {
+  gerar(numeroLimite: number): number {
     return Math.floor(Math.random() * numeroLimite);
   }
 
-  private existeNaLista(_lista: number[], valor: number): boolean {
-    return _lista.indexOf(valor) > -1;
+  private existirNaLista(): boolean {
+    return this.numerosAleatorios.indexOf(this.numeroAleatorio) > -1;
   }
 }
